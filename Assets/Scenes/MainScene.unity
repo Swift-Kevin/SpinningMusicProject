@@ -284,6 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 389716030}
   - component: {fileID: 389716029}
+  - component: {fileID: 389716031}
   m_Layer: 0
   m_Name: SpinningObjectBase
   m_TagString: Untagged
@@ -303,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c53ef24ba259d42a151d842ae12776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotRate: 60
+  spinManagerScript: {fileID: 389716031}
 --- !u!4 &389716030
 Transform:
   m_ObjectHideFlags: 0
@@ -311,7 +312,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389716028}
-  m_LocalRotation: {x: -0.03378254, y: -0.95766234, z: 0.1260784, w: 0.25660437}
+  m_LocalRotation: {x: 0.003901817, y: -0.92956644, z: 0.21520327, w: 0.29929692}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -319,7 +320,24 @@ Transform:
   - {fileID: 1962230398}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 12.953, y: -149.133, z: 7.631}
+  m_LocalEulerAnglesHint: {x: 23.73, y: -142.7, z: 7.631}
+--- !u!114 &389716031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389716028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27021b302caddd540b0b8d19a991f4c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinObjectScript: {fileID: 389716029}
+  spinningObject: {fileID: 389716028}
+  spinningSpeed: 60
+  waitToRotateMinimum: 0.5
+  waitToRotateMaximum: 3
 --- !u!1 &401582942
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changerScript: {fileID: 1271134361}
+  spinManagerScript: {fileID: 389716031}
 --- !u!1 &594268458
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

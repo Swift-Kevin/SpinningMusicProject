@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [SerializeField] MenuChanger changerScript;
+    [SerializeField] SpinManager spinManagerScript;
 
     private void Awake()
     {
@@ -19,5 +20,6 @@ public class GameManager : MonoBehaviour
     public void TickMenuChanger()
     {
         changerScript.CallTicker();
+        spinManagerScript.CallTicker();
     }
 }
