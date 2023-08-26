@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpinManager : MonoBehaviour, ITick
 {
     [SerializeField] SpinObject spinObjectScript;
+    [SerializeField] RatSpinning ratSpinScript;
     [SerializeField] GameObject spinningObject;
+    [SerializeField] Toggle spinScriptToggle;
     [SerializeField, Range(15f, 240f)] float spinningSpeed;
     [SerializeField, Range(0.5f, 3f)] float waitToRotateMinimum;
     [SerializeField, Range(3f, 5f)] float waitToRotateMaximum;
@@ -16,6 +19,7 @@ public class SpinManager : MonoBehaviour, ITick
     private void Start()
     {
         SetStartingValues();
+        spinScriptToggle.onValueChanged.AddListener(SetSpinScript);
     }
     
     /// <summary>
@@ -32,8 +36,8 @@ public class SpinManager : MonoBehaviour, ITick
     private void Tick()
     {
         spinObjectScript.SetCanSpin(!isEscaped);
+        ratSpinScript.SetRatCanSpin(!isEscaped);
         isEscaped = !isEscaped;
-    
     }
 
     /// <summary>
@@ -41,9 +45,16 @@ public class SpinManager : MonoBehaviour, ITick
     /// </summary>
     private void SetStartingValues()
     {
-        spinObjectScript.SetRotSpeed(spinningSpeed);
-        spinObjectScript.SetWaitMax(waitToRotateMaximum);
-        spinObjectScript.SetWaitMin(waitToRotateMinimum);
+        ratSpinScript.SetRatRotSpeed(spinningSpeed);
+        ratSpinScript.SetRatWaitMax(waitToRotateMaximum);
+        ratSpinScript.SetRatWaitMin(waitToRotateMinimum);
+
         Tick();
+    }
+
+    private void SetSpinScript(bool val)
+    {
+        spinObjectScript.enabled = val;
+        ratSpinScript.enabled = val;
     }
 }

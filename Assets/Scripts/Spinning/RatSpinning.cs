@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 
-public class SpinObject : MonoBehaviour
+public class RatSpinning : MonoBehaviour
 {
+
     [SerializeField] SpinManager spinManagerScript;
 
     private float rotRate;
     private float waitMin, waitMax;
     private bool flipX, flipY, flipZ;
     private bool runningIENUM;
-
     private bool canSpin = false;
-
-    Quaternion origRot;
+    private Quaternion origRot;
+    private float waitingTime;
 
     private void Start()
     {
@@ -61,7 +60,8 @@ public class SpinObject : MonoBehaviour
     private IEnumerator flipDir()
     {
         runningIENUM = true;
-        yield return new WaitForSeconds(Random.Range(waitMin, waitMax));
+        waitingTime = Random.Range(waitMin, waitMax);
+        yield return new WaitForSeconds(waitingTime);
 
         flipX = Random.Range(0f, 1f) > 0.5f ? true : false;
         flipY = Random.Range(0f, 1f) > 0.5f ? true : false;
@@ -71,30 +71,30 @@ public class SpinObject : MonoBehaviour
     }
 
 
-    
+
     /// <summary>
     /// Sets if the spinner should run or not
     /// </summary>
     /// <param name="val"></param>
-    public void SetCanSpin(bool val) { canSpin = val; }
+    public void SetRatCanSpin(bool val) { canSpin = val; }
 
     /// <summary>
     /// Sets the rotational speed of the rotating object.
     /// </summary>
     /// <param name="val"></param>
-    public void SetRotSpeed(float val) { rotRate = val; }
+    public void SetRatRotSpeed(float val) { rotRate = val; }
 
     /// <summary>
     /// Sets the minimum wait time to continue rotating.
     /// </summary>
     /// <param name="val"></param>
-    public void SetWaitMin(float val) { waitMin = val; }
+    public void SetRatWaitMin(float val) { waitMin = val; }
 
     /// <summary>
     /// Sets the maximum waiting time to continue rotating.
     /// </summary>
     /// <param name="val"></param>
-    public void SetWaitMax(float val) { waitMax = val; }
+    public void SetRatWaitMax(float val) { waitMax = val; }
 
 
 }
