@@ -40,24 +40,12 @@ public class VertexManipulation : MonoBehaviour
     {
         for (int i = 0; i < comps.Length; ++i)
         {
-            if (IsAtPoint(comps[i]))
-            {
-                SetNewPoint(comps[i]);
-            }
-            else
-            {
-                comps[i].altered = Vector3.Lerp(comps[i].altered, comps[i].destination, Time.deltaTime * 60f);
-            }
+            SetNewPoint(comps[i]);
+            comps[i].altered = Vector3.Lerp(comps[i].origin, comps[i].destination, 5f);
+            // Debug.Log(comps[i].origin + comps[i].altered + comps[i].destination);
         }
     }
 
-    private Vector3 RandRangeVals()
-    {
-        temp.x = Random.Range(minMove, maxMove);
-        temp.y = Random.Range(minMove, maxMove);
-        temp.z = Random.Range(minMove, maxMove);
-        return temp;
-    }
 
     private bool IsAtPoint(VComp v)
     {
@@ -65,9 +53,17 @@ public class VertexManipulation : MonoBehaviour
         return v.atPoint;
     }
 
+    private float tX, tY, tZ;
+
     private void SetNewPoint(VComp v)
     {
-        v.atPoint = false;
-        v.destination = v.origin * Random.Range(minMove, maxMove);
+        if (v.altered == v.destination)
+        {
+            v.atPoint = false;
+            tX = Random.Range(v.origin.x, v.origin.x + (v.origin.x * 5000f));
+            tY = Random.Range(v.origin.y, v.origin.y + (v.origin.y * 5000f));
+            tZ = Random.Range(v.origin.z, v.origin.z + (v.origin.z * 5000f));
+            v.destination = new Vector3(tX, tY, tZ);
+        }
     }
 }
