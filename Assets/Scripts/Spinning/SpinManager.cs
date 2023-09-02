@@ -57,4 +57,14 @@ public class SpinManager : MonoBehaviour, ITick
         spinObjectScript.enabled = val;
         ratSpinScript.enabled = val;
     }
+
+    public void TurnOffSpinScript()
+    {
+        spinObjectScript.enabled = false;
+    }
+
+    public void TurnOnSpinScript()
+    {
+        spinObjectScript.enabled = true;
+    }
 }

@@ -15,11 +15,27 @@ public class RatSpinning : MonoBehaviour
     private Quaternion origRot;
     private float waitingTime;
 
-    private void Start()
+    private Vector3 toRot, up, right;
+
+    private void Awake()
     {
         origRot = transform.rotation;
+        
+        toRot = Vector3.one;
+        right = Vector3.Cross(toRot, Vector3.up);
+        up = Vector3.Cross(toRot, right);
     }
 
+    private void OnEnable()
+    {
+        spinManagerScript.TurnOffSpinScript();
+    }
+
+    private void OnDisable()
+    {
+        spinManagerScript.TurnOnSpinScript();
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -28,17 +44,18 @@ public class RatSpinning : MonoBehaviour
             float rotX = flipX ? rotRate : -rotRate;
             float rotY = flipY ? rotRate : -rotRate;
             float rotZ = flipZ ? rotRate : -rotRate;
-
+            
             rotX *= Time.deltaTime;
             rotY *= Time.deltaTime;
             rotZ *= Time.deltaTime;
-
+            
             if (!runningIENUM)
             {
                 StartCoroutine(flipDir());
             }
-
+            
             transform.Rotate(rotX, rotY, rotZ);
+
         }
         else
         {
